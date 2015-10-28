@@ -29,6 +29,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.firebase.client.Firebase;
+
 public class MainActivity extends Activity {
 
 	Button bt;
@@ -41,6 +43,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Log.d("test", "wifitest");
+		Firebase.setAndroidContext(this);
 		init();
 		if (rssiData == null) {
 			rssiData = readDataFromFile();
@@ -49,7 +52,14 @@ public class MainActivity extends Activity {
 
 	private void init() {
 		getViewIds();
+		initializeFirebase();
 
+	}
+
+	private void initializeFirebase() {
+
+		Firebase myFirebaseRef = new Firebase("https://torrid-torch-2612.firebaseio.com/");
+        myFirebaseRef.child("message").setValue("Do you have data? You'll love Firebase.");
 	}
 
 	private void getViewIds() {
@@ -77,16 +87,12 @@ public class MainActivity extends Activity {
 					.readObject();
 			objectInputStream.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (StreamCorruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return myNewlyReadInMap;
@@ -269,10 +275,8 @@ public class MainActivity extends Activity {
 			out.close();
 			objectOutputStream.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
