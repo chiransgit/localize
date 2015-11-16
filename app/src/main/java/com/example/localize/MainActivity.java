@@ -18,6 +18,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -37,12 +38,16 @@ public class MainActivity extends Activity {
 	EditText etx1, ety1, aix1, aiy1;
 	HashMap<String, ArrayList<String>> rssiData;
 	ArrayList<String> coods;
+	Firebase myFirebaseRef = null;
+	MySQLiteHelper sqlHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Log.d("test", "wifitest");
+        sqlHelper = new MySQLiteHelper(this);
+        SQLiteDatabase sqLiteDatabase = sqlHelper.getWritableDatabase();
 		Firebase.setAndroidContext(this);
 		init();
 		if (rssiData == null) {
@@ -58,7 +63,7 @@ public class MainActivity extends Activity {
 
 	private void initializeFirebase() {
 
-		Firebase myFirebaseRef = new Firebase("https://torrid-torch-2612.firebaseio.com/");
+		myFirebaseRef = new Firebase("https://torrid-torch-2612.firebaseio.com/");
         myFirebaseRef.child("message").setValue("Do you have data? You'll love Firebase.");
 	}
 
@@ -267,6 +272,7 @@ public class MainActivity extends Activity {
 				for (String s : rssiData.get(key)) {
 					val_string += s + " ";
 				}
+				myFirebaseRef.child(key).setValue(val_string);
 				out.write(key + "--->" + val_string);
 				out.write("\n");
 				String display = key + "  " + val_string;

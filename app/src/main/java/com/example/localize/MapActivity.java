@@ -52,9 +52,10 @@ public class MapActivity extends Activity implements OnTouchListener {
 		Log.d("MapActivity", "width " + String.valueOf(width));
 //		dot.setX(0);
 //		dot.setY(-920);
+
+
 		
-		
-		// RUnnable
+		// Runnable
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
@@ -64,6 +65,10 @@ public class MapActivity extends Activity implements OnTouchListener {
 		new Thread(runnable).start();
 
 		// view.setOnTouchListener(this);
+	}
+
+	protected void localizeTest(){
+
 	}
 
 	protected void moveTheDot() {
