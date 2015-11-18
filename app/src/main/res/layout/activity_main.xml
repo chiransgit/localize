@@ -28,7 +28,7 @@
         android:weightSum="2" >
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/et_x"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
@@ -39,7 +39,7 @@
         </EditText>
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/et_y"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
@@ -61,7 +61,7 @@
         android:weightSum="2" >
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/ai_x"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
@@ -72,7 +72,7 @@
         </EditText>
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/ai_y"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"

@@ -73,9 +73,6 @@ public class MapActivity extends Activity {
             Log.d("MapActivity" , coordinates + "-->" + rssiString);
             rssiValues.clear();
         }
-
-
-
     }
 
 	protected void moveTheDot() {
