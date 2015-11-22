@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
 
         String newValue = "";
         for (String val: rssiData.keySet()){
-            String newKey = "(" + startX + "," + startY + ")";
+            String newKey = startX + "," + startY;
             newValue += rssiData.get(val) + ":";
             wifiSQLData.put(newKey, newValue);
         }

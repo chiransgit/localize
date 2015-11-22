@@ -19,13 +19,28 @@ public class MySQLiteDatabaseAdapter {
         sqlhelper = new MySQLiteHelper(context);
     }
 
+
+    public String getRow(String coods){
+        SQLiteDatabase db = sqlhelper.getWritableDatabase();
+        String [] columns = {sqlhelper.COLUMN_VALUES};
+        Cursor cursor = db.query(sqlhelper.TABLE_WIFI, columns, coods, null, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+        while(cursor.moveToNext()){
+            String rssiValues = cursor.getString(0);
+            buffer.append(rssiValues);
+        }
+        return buffer.toString();
+
+    }
+
+
     public long insertData(String coods, String values)
     {
         SQLiteDatabase db = sqlhelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(sqlhelper.COLUMN_COODS, coods);
         contentValues.put(sqlhelper.COLUMN_VALUES, values);
-        long id = db.insert(sqlhelper.TABLE_WIFI, null, contentValues);
+        long id = db.insertWithOnConflict(sqlhelper.TABLE_WIFI, null, contentValues, SQLiteDatabase.CONFLICT_REPLACE);
         return id;
     }
 
@@ -52,11 +67,11 @@ public class MySQLiteDatabaseAdapter {
         public static final String COLUMN_VALUES = "rssiFeed";
 
         private static final String DATABASE_NAME = "localize.db";
-        private static final int DATABASE_VERSION = 8;
+        private static final int DATABASE_VERSION = 11;
         private Context context;
 
         // Database creation sql statement
-        private static final String DATABASE_CREATE = "CREATE TABLE " + TABLE_WIFI + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_COODS + " VARCHAR(255), " + COLUMN_VALUES + " VARCHAR(255));";
+        private static final String DATABASE_CREATE = "CREATE TABLE " + TABLE_WIFI + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_COODS + " TEXT NOT NULL UNIQUE, " + COLUMN_VALUES + " TEXT NOT NULL);";
         private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_WIFI;
 
         public MySQLiteHelper(Context context) {
