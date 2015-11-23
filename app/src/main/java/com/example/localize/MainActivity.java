@@ -3,10 +3,8 @@ package com.example.localize;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 
@@ -23,6 +22,7 @@ public class MainActivity extends Activity {
 
     Button bt;
     EditText etx1, ety1, aix1, aiy1;
+    TextView tv_pollResults;
     TreeMap<String, String> wifiSQLData;
     Firebase myFirebaseRef = null;
     MySQLiteDatabaseAdapter sqlHelper;
@@ -53,9 +53,13 @@ public class MainActivity extends Activity {
         ety1 = (EditText) findViewById(R.id.et_y);
         aix1 = (EditText) findViewById(R.id.ai_x);
         aiy1 = (EditText) findViewById(R.id.ai_y);
+        tv_pollResults = (TextView) findViewById(R.id.tv_rssi);
     }
 
     public void onBtPollClick(View v) {
+
+        tv_pollResults.setText("");
+        tv_pollResults.setVisibility(View.GONE);
 
         if(wifiSQLData == null){
             wifiSQLData = new TreeMap<>();
@@ -95,6 +99,20 @@ public class MainActivity extends Activity {
         etx1.setText(String.valueOf(startX));
         startY += incY;
         ety1.setText(String.valueOf(startY));
+
+
+        if(tv_pollResults.getVisibility() == View.GONE){
+            String display = "";
+            for(String cood: wifiSQLData.keySet())
+            {
+                String values = wifiSQLData.get(cood);
+                display = values.replaceAll(":", "/s");
+
+            }
+            tv_pollResults.setText(display);
+            tv_pollResults.setVisibility(View.VISIBLE);
+        }
+
         rssiData.clear();
         wifiSQLData.clear();
     }

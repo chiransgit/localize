@@ -6,7 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.localize.MainActivity" >
+    tools:context="com.example.localize.MainActivity"
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:id="@+id/imageView1"
@@ -15,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp"
-        android:src="@drawable/localize" />
+        android:src="@drawable/app_banner"/>
 
     <LinearLayout
         android:id="@+id/ll_coodFields"
@@ -24,32 +25,48 @@
         android:layout_below="@id/imageView1"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp"
+        android:layout_marginTop="26dp"
         android:orientation="horizontal"
-        android:weightSum="2" >
+        android:weightSum="2">
 
-        <EditText
-            android:id="@+id/et_x"
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="X Coordinate" >
+            android:layout_weight="1">
 
-        </EditText>
+            <AutoCompleteTextView
+                android:id="@+id/et_x"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:hint="X coordinate"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_weight="1"/>
 
-        <EditText
-            android:id="@+id/et_y"
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Y Coordinate" >
+            android:layout_weight="1">
 
-        </EditText>
+            <AutoCompleteTextView
+                android:id="@+id/et_y"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:hint="Y coordinate"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
-    
+
     <LinearLayout
         android:id="@+id/ll_coodFields2"
         android:layout_width="fill_parent"
@@ -58,29 +75,61 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp"
         android:orientation="horizontal"
-        android:weightSum="2" >
+        android:weightSum="2">
 
-        <EditText
-            android:id="@+id/ai_x"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Auto Increment X" >
+            android:layout_weight="1">
 
-        </EditText>
+            <AutoCompleteTextView
+                android:id="@+id/ai_x"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:hint="Increment X"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_weight="1"/>
 
-        <EditText
-            android:id="@+id/ai_y"
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="Auto Incremnent Y" >
+            android:layout_weight="1">
 
-        </EditText>
+            <AutoCompleteTextView
+                android:id="@+id/ai_y"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:hint="Increment Y"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_weight="1"/>
+
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/ll_coodFields2">
+
+        <TextView
+            android:id="@+id/tv_rssi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorAccent"
+            android:textSize="18dp"
+            android:visibility="visible"
+            android:text="0, -79, -74, 0, 0, -73, 0, -67, 0, 0, -79, 0, -72, 0, 0, -65, 0, 0, 0, -61, -76, 0"/>
     </LinearLayout>
 
     <LinearLayout
@@ -90,27 +139,31 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp"
         android:orientation="horizontal"
-        android:weightSum="2" >
+        android:weightSum="2">
 
         <Button
             android:id="@+id/button1"
-            style="@style/button_text"
+            style="?android:textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/red_button"
             android:onClick="onBtPollClick"
-            android:text="Poll" />
+            android:text="Poll"
+            android:textStyle="bold"
+            android:textColor="@color/legacy_pressed_highlight"
+            android:textSize="22dp"/>
 
         <Button
             android:id="@+id/button2"
-            style="@style/button_text"
+            style="?android:textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/red_button"
             android:onClick="onBtMapClick"
-            android:text="MAP" />
+            android:text="MAP"
+            android:textStyle="bold"
+            android:textColor="@color/legacy_pressed_highlight"
+            android:textSize="22dp"/>
     </LinearLayout>
 
 </RelativeLayout>
