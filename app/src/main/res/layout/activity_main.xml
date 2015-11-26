@@ -128,8 +128,7 @@
             android:gravity="center_horizontal"
             android:textColor="@color/colorAccent"
             android:textSize="18dp"
-            android:visibility="visible"
-            android:text="0, -79, -74, 0, 0, -73, 0, -67, 0, 0, -79, 0, -72, 0, 0, -65, 0, 0, 0, -61, -76, 0"/>
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout

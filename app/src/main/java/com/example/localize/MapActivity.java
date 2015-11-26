@@ -59,14 +59,18 @@ public class MapActivity extends Activity {
 
         filteredDB = zeroMatch(current, rssiDB);
 
+        if(filteredDB.size() <1){
+            filteredDB = rssiDB;
+        }
+
         String coordinates = "";
         int min = 99999;
 
-        for(String cood: rssiDB.keySet()){
+        for(String cood: filteredDB.keySet()){
             printArrayList(current, "TBT");
-            printArrayList(rssiDB.get(cood), cood);
+            printArrayList(filteredDB.get(cood), cood);
 
-            int diff = findMatch(current, rssiDB.get(cood));
+            int diff = findMatch(current, filteredDB.get(cood));
             if(diff < min){
                 min = diff;
                 coordinates = cood;
@@ -138,7 +142,7 @@ public class MapActivity extends Activity {
 //
 //        }
         x = x * 9.7f + 170;
-        y = y * 4.0f + 280;
+        y = y * 3.7f + 280;
         Log.d("Localize", String.valueOf(x) + " " + String.valueOf(y));
         final int new_X = Math.round(x);
         final int new_Y = Math.round(y);
